@@ -19,8 +19,7 @@ public class WSController {
     }
 
     @PostMapping("/send-private-messagess/{id}")
-    public void sendPrivateMessage(@PathVariable final String id,
-                                   @RequestBody final Message message) {
+    public void sendPrivateMessage(@PathVariable final String id, @RequestBody final Message message) {
         service.notifyUser(id, message.getMessageContent());
     }
 }
