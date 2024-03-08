@@ -1,4 +1,4 @@
 FROM openjdk:17-oracle
+ADD build/libs/*.jar WebSocket.jar
 EXPOSE 8080
-COPY build/libs/WebSocket.jar WebSocket.jar
-ENTRYPOINT ["java","-jar","/WebSocket.jar"]
+ENTRYPOINT ["java","-jar","WebSocket.jar"]
