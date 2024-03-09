@@ -69,7 +69,7 @@ jobs:
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
-        image: vishalgupta226/websocket
+        image: vishalgupta226/websocket_debug
         tags: latest
         registry: docker.io
         dockerfile: Dockerfile
