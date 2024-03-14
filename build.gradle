@@ -44,4 +44,4 @@ tasks.named('test') {
 test {
 	useJUnitPlatform()
 }
-archivesBaseName = 'ChatApplication'
+archivesBaseName = 'ChatApp'
