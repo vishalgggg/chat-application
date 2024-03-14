@@ -2,6 +2,9 @@ package com.websocket.wstutorial;
 
 import com.websocket.wstutorial.dto.Message;
 import com.websocket.wstutorial.dto.ResponseMessage;
+
+import reactor.core.publisher.Mono;
+
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -18,21 +21,23 @@ public class MessageController {
 
     @MessageMapping("/message")
     @SendTo("/topic/messages")
-    public ResponseMessage getMessage(final Message message) throws InterruptedException {
+    public Mono<ResponseMessage> getMessage(final Message message) throws InterruptedException {
         Thread.sleep(1000);
         // notificationService.sendGlobalNotification();
-        return new ResponseMessage(HtmlUtils.htmlEscape(message.getMessageContent()));
+        
+       
+        return Mono.just(new ResponseMessage(HtmlUtils.htmlEscape(message.getMessageContent())));
     }
 
     @MessageMapping("/private-message")
     @SendToUser("/topic/private-messages")
-    public ResponseMessage getPrivateMessage(final Message message,
+    public Mono<ResponseMessage> getPrivateMessage(final Message message,
                                              final Principal principal) throws InterruptedException {
         Thread.sleep(1000);
         // notificationService.sendPrivateNotification(principal.getName());
-        return new ResponseMessage(HtmlUtils.htmlEscape(
+        return Mono.just(new ResponseMessage(HtmlUtils.htmlEscape(
                 "Sending private message to user " + principal.getName() + ": "
-                        + message.getMessageContent())
+                        + message.getMessageContent()))
         );
     }
 }
